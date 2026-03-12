@@ -1,4 +1,4 @@
-﻿namespace LandmarksAPI.Services.Checkin.Models
+﻿namespace LandmarksAPI.Checkin.Models
 {
     public class CheckinResponse
     {

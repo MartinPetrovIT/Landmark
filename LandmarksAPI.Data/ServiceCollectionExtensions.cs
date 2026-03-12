@@ -1,4 +1,6 @@
-﻿using LandmarksAPI.Data.Landmark.RepositoryInterfaces;
+﻿using LandmarksAPI.Data.Checkin.Repository;
+using LandmarksAPI.Data.Checkin.RepositoryInterfaces;
+using LandmarksAPI.Data.Landmark.RepositoryInterfaces;
 using LandmarksAPI.Data.Landmark.Respositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,7 @@ namespace LandmarksAPI.Data
             });
 
             services.AddScoped<ILandmarkRepository, LandmarkRepository>();
+            services.AddScoped<ICheckinRepository, CheckinRepository>();
 
             return services;
         }

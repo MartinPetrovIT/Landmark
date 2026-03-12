@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace LandmarksAPI.Data.CheckIn.Entities
+namespace LandmarksAPI.Data.Checkin.Entities
 {
     public class Checkin
     {
@@ -20,5 +20,7 @@ namespace LandmarksAPI.Data.CheckIn.Entities
         public DateTime CheckinTime { get; set; }
 
         public string PhotoUrl { get; set; } = string.Empty;
+
+        public int PointsEarned { get; set; }
     }
 }
