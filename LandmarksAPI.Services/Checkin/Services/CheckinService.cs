@@ -67,6 +67,17 @@ namespace LandmarksAPI.Services.Checkin.Services
                 CheckinId = newCheckin.Id
             };
         }
+        public async Task<CheckinResponse> AttachPhotoAsync(string checkinId, string photoUrl)
+        {
+            bool success = await checkinRepo.AddPhotoAsync(checkinId, photoUrl);
+
+            if (!success)
+            {
+                return new CheckinResponse { IsSuccess = false, Message = "Чекирането не е намерено!" };
+            }
+
+            return new CheckinResponse { IsSuccess = true, Message = "Снимката е добавена успешно!" };
+        }
 
         // --- МАТЕМАТИКАТА ЗА РАЗСТОЯНИЕТО (Хаверсин) ---
         private double CalculateDistance(double lat1, double lon1, double lat2, double lon2)

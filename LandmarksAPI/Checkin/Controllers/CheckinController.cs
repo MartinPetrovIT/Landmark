@@ -1,4 +1,5 @@
 ﻿using LandmarksAPI.Checkin.Mappings;
+using LandmarksAPI.Services.Checkin.Models;
 using LandmarksAPI.Services.Checkin.ServicesInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,19 @@ namespace LandmarksAPI.Checkin.Controllers
             }
 
             return BadRequest(responseMapped);
+        }
+
+        [HttpPatch("{id}/photo")]
+        public async Task<IActionResult> AddPhoto(string id, [FromBody] AddPhotoRequest request)
+        {
+            var response = await checkinService.AttachPhotoAsync(id, request.PhotoUrl);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
         }
     }
 }

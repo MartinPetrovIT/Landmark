@@ -1,4 +1,5 @@
-﻿using LandmarksAPI.Data.Checkin.RepositoryInterfaces;
+﻿using LandmarksAPI.Data.Checkin.Entities;
+using LandmarksAPI.Data.Checkin.RepositoryInterfaces;
 using MongoDB.Driver;
 
 namespace LandmarksAPI.Data.Checkin.Repository
@@ -25,6 +26,21 @@ namespace LandmarksAPI.Data.Checkin.Repository
         {
             // Записваме новото чекиране в базата
             await checkinCollection.InsertOneAsync(checkin);
+        }
+
+        public async Task<bool> AddPhotoAsync(string checkinId, string photoUrl)
+        {
+            // 1. Намираме записа по ID
+            var filter = Builders<Entities.Checkin>.Filter.Eq(c => c.Id, checkinId);
+
+            // 2. Казваме кое поле искаме да променим (Set)
+            var update = Builders<Entities.Checkin>.Update.Set(c => c.PhotoUrl, photoUrl);
+
+            // 3. Изпълняваме го
+            var result = await checkinCollection.UpdateOneAsync(filter, update);
+
+            // Ако е променило поне 1 запис, значи е успешно
+            return result.ModifiedCount > 0;
         }
     }
 }
